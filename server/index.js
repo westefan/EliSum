@@ -5,6 +5,10 @@ const app = express();
 
 const HOST = 'localhost';
 const PORT = 3000;
+// Artificial token limiter
+const TOKEN_LIMIT = 1000;
+// const OPENAI_MODEL = 'text-curie-001';
+const OPENAI_MODEL = 'text-davinci-002';
 
 const {Configuration, OpenAIApi} = require('openai');
 const configuration = new Configuration({
@@ -12,19 +16,21 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
+/**
+ *  Using the OpenAI API to summarize the input text.
+ */
 async function summarize(input) {
-  console.log(input);
-  const response = await openai.createCompletion('text-curie-001', {
+  input = input.split(' ').slice(0, TOKEN_LIMIT).join(' ');
+
+  const response = await openai.createCompletion(OPENAI_MODEL, {
     prompt: `Summarize this for a second-grade student: ${input}`,
     temperature: 0.7,
-    max_tokens: 300,
+    max_tokens: 100,
     stop: ''
   });
 
   return response.data;
 }
-
-summarize();
 
 app.use((_, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');

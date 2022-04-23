@@ -1,11 +1,13 @@
 html {
   --background: #222f3e;
+  --background-alt: #576574;
   --primary: #48dbfb;
   --primary-alt: #0abde3;
   --accent: #1dd1a1;
   --accent-alt: #10ac84;
   --font: #c8d6e5;
   --hover: #576574;
+  --border: #8395a7;
 }
 
 body {
@@ -67,4 +69,41 @@ button:hover {
 
 #source-output span:hover {
   background-color: var(--hover);
+}
+
+.search {
+  /* TODO: deactivated for now */
+  display: none;
+  position: relative;
+}
+
+.search input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 28px;
+  outline: 0;
+  box-sizing: border-box;
+  background-color: var(--background-alt);
+  color: var(--font);
+}
+
+.search input:focus {
+  border-color: var(--primary);
+}
+
+.search svg {
+  position: absolute;
+  fill: var(--font);
+  top: 6px;
+  left: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+::placeholder {
+  color: var(--font);
+  opacity: 1;
 }

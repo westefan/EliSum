@@ -3,7 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: {
-    background: path.resolve(__dirname, '..', 'client/scripts', 'index.ts')
+    index: path.resolve(__dirname, '..', 'client/scripts', 'index.ts')
   },
   output: {
     path: path.join(__dirname, '../dist'),
@@ -23,7 +23,7 @@ module.exports = {
   },
   plugins: [
     new CopyPlugin({
-      patterns: [{from: './client', to: './client', context: ''}]
+      patterns: [{from: './client', to: './', context: ''}]
     })
   ]
 };
